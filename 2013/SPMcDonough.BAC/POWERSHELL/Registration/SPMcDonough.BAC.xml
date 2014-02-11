@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ps:Config xmlns:ps="urn:Microsoft.SharePoint.PowerShell" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:Microsoft.SharePoint.PowerShell SPCmdletSchema.xsd">
+	<ps:Assembly Name="$SharePoint.Project.AssemblyFullName$">
+    <ps:Cmdlet>
+      <ps:VerbName>Export-SPBackupCatalog</ps:VerbName>
+      <ps:ClassName>SPMcDonough.BAC.SPCmdletExportSPBackupCatalog</ps:ClassName>
+      <ps:HelpFile>SPMcDonough.BAC.Cmdlets.dll-help.xml</ps:HelpFile>
+    </ps:Cmdlet>
+    <ps:Cmdlet>
+			<ps:VerbName>Get-SPBackupCatalog</ps:VerbName>
+			<ps:ClassName>SPMcDonough.BAC.SPCmdletGetSPBackupCatalog</ps:ClassName>
+			<ps:HelpFile>SPMcDonough.BAC.Cmdlets.dll-help.xml</ps:HelpFile>
+		</ps:Cmdlet>
+    <ps:Cmdlet>
+      <ps:VerbName>Remove-SPBackupCatalog</ps:VerbName>
+      <ps:ClassName>SPMcDonough.BAC.SPCmdletRemoveSPBackupCatalog</ps:ClassName>
+      <ps:HelpFile>SPMcDonough.BAC.Cmdlets.dll-help.xml</ps:HelpFile>
+    </ps:Cmdlet>
+    <ps:Cmdlet>
+      <ps:VerbName>Send-SPBackupStatus</ps:VerbName>
+      <ps:ClassName>SPMcDonough.BAC.SPCmdletSendSPBackupStatus</ps:ClassName>
+      <ps:HelpFile>SPMcDonough.BAC.Cmdlets.dll-help.xml</ps:HelpFile>
+    </ps:Cmdlet>
+    <ps:Cmdlet>
+      <ps:VerbName>Set-SPBackupCatalog</ps:VerbName>
+      <ps:ClassName>SPMcDonough.BAC.SPCmdletSetSPBackupCatalog</ps:ClassName>
+      <ps:HelpFile>SPMcDonough.BAC.Cmdlets.dll-help.xml</ps:HelpFile>
+    </ps:Cmdlet>
+  </ps:Assembly>
+</ps:Config>

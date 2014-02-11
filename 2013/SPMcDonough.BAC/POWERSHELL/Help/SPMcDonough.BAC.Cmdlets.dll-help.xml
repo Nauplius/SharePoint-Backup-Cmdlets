@@ -1,0 +1,902 @@
+<helpItems xmlns="http://msh" schema="maml">
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/1" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+    <command:details>
+      <command:name>Set-SPBackupCatalog</command:name>
+      <maml:description>
+        <maml:para>This cmdlet provides a mechanism to make changes and updates to specific properties on the spbrtoc.xml file that is associated with a backup catalog.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para>Copyright (C) 2011 Sean P. McDonough. Use of these cmdlets is at your own risk. Sean P. McDonough assumes no liability. For more information on the SharePoint 2010 Backup Augmentation Cmdlets, see http://sharepointbac.codeplex.com. </maml:para>
+      </maml:copyright>
+      <command:verb>Set</command:verb>
+      <command:noun>SPBackupCatalog</command:noun>
+      <dev:version>1.0.0.0</dev:version>
+    </command:details>
+    <maml:description>
+      <maml:para>This cmdlet provides a mechanism to make changes and updates to specific properties on the spbrtoc.xml file that is associated with a backup catalog.</maml:para>
+      <maml:para />
+      <maml:para>Copyright (C) 2011 Sean P. McDonough. Use of these cmdlets is at your own risk. Sean P. McDonough assumes no liability. For more information on the SharePoint 2010 Backup Augmentation Cmdlets, see http://sharepointbac.codeplex.com. </maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-SPBackupCatalog</maml:name>
+        <command:parameter required="true" position="1">
+          <maml:name>Identity</maml:name>
+          <command:parameterValue required="true">SPBackupCatalogPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>UpdateCatalogPath</maml:name>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>AssignmentCollection</maml:name>
+          <command:parameterValue required="true">SPAssignmentCollection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" globbing="false" pipelineInput="true (ByValue)" position="1" variableLength="false">
+        <maml:name>Identity</maml:name>
+        <maml:description>
+          <maml:para>The backup catalog which will serve as the target for property changes. This can be specified as an existing SPBackupCatalog object or as a path to the target backup catalog root (i.e., where the spbrtoc.xml resides).</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">SPBackupCatalogPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>SPBackupCatalogPipeBind</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named" variableLength="false">
+        <maml:name>UpdateCatalogPath</maml:name>
+        <maml:description>
+          <maml:para>When this switch is set, the backup set pointers contained within the catalog will be validated and corrected if necessary to make them consistent with the current path held by the SPBackupCatalog. This type of correction becomes necessary when a backup catalog that was created at one path (for example, \\BackupServer\Backups\) is moved to another path (for example, \\BackupServer\Restores\) and referenced. In this scenario, folder pointers that are internal to the backup catalog will still point to \\BackupServer\Backups\. Use of this switch will correct those pointers to reference the path currently help by the SPBackupCatalog.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" globbing="false" pipelineInput="true (ByValue)" position="named" variableLength="false">
+        <maml:name>AssignmentCollection</maml:name>
+        <maml:description>
+          <maml:para>Manages objects for the purpose of proper disposal. Use of objects, such as SPWeb or SPSite, can use large amounts of memory and use of these objects in Windows PowerShell scripts requires proper memory management. Using the SPAssignment object, you can assign objects to a variable and dispose of the objects after they are needed to free up memory. When SPWeb, SPSite, or SPSiteAdministration objects are used, the objects are automatically disposed of if an assignment collection or the Global parameter is not used.</maml:para>
+          <maml:para />
+          <maml:para>When the Global parameter is used, all objects are contained in the global store. If objects are not immediately used, or disposed of by using the Stop-SPAssignment command, an out-of-memory scenario can occur.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SPAssignmentCollection</command:parameterValue>
+        <dev:type>
+          <maml:name>SPAssignmentCollection</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name />
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name />
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <maml:alertSet>
+      <maml:title />
+      <maml:alert>
+        <maml:para>For more information, type "Get-Help Set-SPBackupCatalog -detailed". For technical information, type "Get-Help Set-SPBackupCatalog -full".</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE------------------</maml:title>
+        <dev:code>Get-SPBackupCatalog \\SPFarmShare\NewBackupLocation | Set-SPBackupCatalog -UpdateCatalogPath</dev:code>
+        <dev:remarks>
+          <maml:para>This example begins by getting the backup catalog that is located at the root of the \\SPFarmShare\NewBackupLocation share. The SPBackupCatalog object that is created is then piped to the Set-SPBackupCatalog command with an option to -UpdateCatalogPath. The use of the -UpdateCatalogPath switch with the Set-SPBackupCatalog cmdlet will result in the replacement of all internal backup set path references to a previous backup catalog path with the current catalog location; i.e., \\SPFarmShare\NewBackupLocation. With this replacement operation, SharePoint can then back up to and restore from the backup catalog (at \\SPFarmShare\NewBackupLocation) as if it had been the original destination for all backup operations.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-SPBackupCatalog</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/1" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+    <command:details>
+      <command:name>Remove-SPBackupCatalog</command:name>
+      <maml:description>
+        <maml:para>This cmdlet is used to selectively remove backup sets from a backup catalog - a process known as "grooming." This permits retention of backup sets based on a count or size limit, and it prevents a backup catalog from growing over time to consume all storage available to it.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para>Copyright (C) 2011 Sean P. McDonough. Use of these cmdlets is at your own risk. Sean P. McDonough assumes no liability. For more information on the SharePoint 2010 Backup Augmentation Cmdlets, see http://sharepointbac.codeplex.com. </maml:para>
+      </maml:copyright>
+      <command:verb>Remove</command:verb>
+      <command:noun>SPBackupCatalog</command:noun>
+      <dev:version>1.0.0.0</dev:version>
+    </command:details>
+    <maml:description>
+      <maml:para>This cmdlet is used to selectively remove backup sets from a backup catalog - a process known as "grooming." This permits retention of backup sets based on a count or size limit, and it prevents a backup catalog from growing over time to consume all storage available to it.</maml:para>
+      <maml:para />
+      <maml:para>Copyright (C) 2011 Sean P. McDonough. Use of these cmdlets is at your own risk. Sean P. McDonough assumes no liability. For more information on the SharePoint 2010 Backup Augmentation Cmdlets, see http://sharepointbac.codeplex.com. </maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Remove-SPBackupCatalog</maml:name>
+        <command:parameter required="false" position="named">
+          <maml:name>EntireCatalog</maml:name>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" position="1">
+          <maml:name>Identity</maml:name>
+          <command:parameterValue required="true">SPBackupCatalogPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>IgnoreBackupSetErrors</maml:name>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="2">
+          <maml:name>RetainCount</maml:name>
+          <command:parameterValue required="true">Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="3">
+          <maml:name>RetainSize</maml:name>
+          <command:parameterValue required="true">Int64</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>AssignmentCollection</maml:name>
+          <command:parameterValue required="true">SPAssignmentCollection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named" variableLength="false">
+        <maml:name>EntireCatalog</maml:name>
+        <maml:description>
+          <maml:para>Specifying this switch results in the complete deletion of all data in the backup catalog. When this switch is specified, the -RetainCount and -RetainSize parameters have no effect.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" globbing="false" pipelineInput="true (ByValue)" position="1" variableLength="false">
+        <maml:name>Identity</maml:name>
+        <maml:description>
+          <maml:para>The backup catalog which will serve as the target for operations. This can be specified as an existing SPBackupCatalog object or as a path to the target backup catalog root (i.e., where the spbrtoc.xml resides).</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">SPBackupCatalogPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>SPBackupCatalogPipeBind</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named" variableLength="false">
+        <maml:name>IgnoreBackupSetErrors</maml:name>
+        <maml:description>
+          <maml:para>When -RetainCount and -RetainSize calculations are performed, they don't include backup sets that have errors. This is to avoid scenarios where backup grooming may remove good backup sets (i.e., those without errors) and leave only bad backup sets behind. If the -IgnoreBackupSetErrors switch is specified, then -RetainCount and -RetainSize calculation don't distinguish between backup sets with errors and those without. Use of this switch should be considered carefully, as it could leave you in a situation where your backup catalog contains only bad backups that are non-restorable.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="2" variableLength="false">
+        <maml:name>RetainCount</maml:name>
+        <maml:description>
+          <maml:para>The maximum number of non error-containing full backup sets to retain. When this parameter is specified, only content+configuration full-mode backups are counted for purposes of retention. Configuration-only backups are ignored for purposes of grooming, but they will be groomed-out if they are older than the last full backup to be retained. Differential backups are associated with their full backup for retention purposes. Even though they aren't included in the backup set count, differential backups are groomed-out or retained according to what happens with their full-mode base backup set.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="3" variableLength="false">
+        <maml:name>RetainSize</maml:name>
+        <maml:description>
+          <maml:para>The maximum size, in bytes, of non error-containing backup sets to be retained. When this parameter is specified, it will groom a backup catalog to the specified size or below. Since this grooming typically occurs after backups have been performed, it obviously cannot permit backup catalogs from growing to a size greater than the -RetainSize; it simply trims the backup catalogs down after-the-fact.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">Int64</command:parameterValue>
+        <dev:type>
+          <maml:name>Int64</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" globbing="false" pipelineInput="true (ByValue)" position="named" variableLength="false">
+        <maml:name>AssignmentCollection</maml:name>
+        <maml:description>
+          <maml:para>Manages objects for the purpose of proper disposal. Use of objects, such as SPWeb or SPSite, can use large amounts of memory and use of these objects in Windows PowerShell scripts requires proper memory management. Using the SPAssignment object, you can assign objects to a variable and dispose of the objects after they are needed to free up memory. When SPWeb, SPSite, or SPSiteAdministration objects are used, the objects are automatically disposed of if an assignment collection or the Global parameter is not used.</maml:para>
+          <maml:para />
+          <maml:para>When the Global parameter is used, all objects are contained in the global store. If objects are not immediately used, or disposed of by using the Stop-SPAssignment command, an out-of-memory scenario can occur.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SPAssignmentCollection</command:parameterValue>
+        <dev:type>
+          <maml:name>SPAssignmentCollection</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name />
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name />
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <maml:alertSet>
+      <maml:title />
+      <maml:alert>
+        <maml:para>For more information, type "Get-Help Remove-SPBackupCatalog -detailed". For technical information, type "Get-Help Remove-SPBackupCatalog -full".</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1-----------------------</maml:title>
+        <dev:code>Remove-SPBackupCatalog \\SPFarmShare\Backups -RetainCount 5 -RetainSize 20GB</dev:code>
+        <dev:remarks>
+          <maml:para>This example combines both a -RetainCount and -RetainSize to groom backups to a fixed full backup count and size. The backup catalog is first trimmed down to five full-mode non error-containing backups and any differential backups that depend on those full-mode backups. After being groomed to five full-mode backups, the backup catalog is further trimmed (if necessary) to get its size to 20GB or less based on remaining non error-containing backup sets.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 2-----------------------</maml:title>
+        <dev:code>Remove-SPBackupCatalog \\SPFarmShare\Backups -EntireCatalog</dev:code>
+        <dev:remarks>
+          <maml:para>In this example, all backup data is deleted from the catalog that is targeted. An spbrtoc.xml file remains in the catalog location, and it continues to reflect restore and non-backup operations, but all backup set data in the location is deleted. This frees the maximum amount of disk space. Note that if this switch is specified, the -RetainCount and -RetainSize parameters have no effect.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 3-----------------------</maml:title>
+        <dev:code>Remove-SPBackupCatalog \\SPFarmShare\Backups -RetainCount 1 -IgnoreBackupSetErrors</dev:code>
+        <dev:remarks>
+          <maml:para>In this example, all backup sets save for the most recent one are deleted. The -IgnoreBackupSetErrors means that any backup set errors will be ignored during the grooming process. Even if the most recent backup set contains errors, it will be the only backup set that is retained following execution of this command. This illustrates why use of the -IngoreBackupSetErrors switch should be considered carefully; it could leave you without a viable backup from which to restore.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 4-----------------------</maml:title>
+        <dev:code>Remove-SPBackupCatalog \\SPFarmShare\Backups -RetainCount 3</dev:code>
+        <dev:remarks>
+          <maml:para>In this example, all backups in the catalog located at \\SPFarmShare\Backup are deleted save for the last three non error-containing full-mode backups (-RetainCount 3) and any differential backups that depend on them. Any restores that were performed remain in the backup catalog; only backup sets/folders are deleted.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 5-----------------------</maml:title>
+        <dev:code>Get-SPBackupCatalog \\SPFarmShare\Backups | Remove-SPBackupCatalog -RetainSize 10GB</dev:code>
+        <dev:remarks>
+          <maml:para>In this example, an SPBackupCatalog object is created and piped to the Remove-SPBackupCatalog cmdlet with a -RetainSize of 10GB specified. The cmdlet then examines the backup catalog; if it finds that the catalog is larger than 10GB in size, it will delete the oldest full backup set, any differential backups that depend on the full backup, and any configuration-only backups that took place prior to the next-oldest full-mode backup. The cmdlet then re-examines the size of the backup catalog and repeats the process until the backup catalog is equal to or less than 10GB in size. Note that by default, only non error-containing backup sets are considered during size calculations to avoid a situation where all viable backup sets are groomed-out. To avoid this behavior, use the -IgnoreBackupSetErrors switch.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-SPBackupCatalog</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/1" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+    <command:details>
+      <command:name>Get-SPBackupCatalog</command:name>
+      <maml:description>
+        <maml:para>This cmdlet is used to retrieve a backup catalog object (SPBackupCatalog) that represents a SharePoint farm backup location. A backup catalog is defined as the top-level folder that contains a table of contents file (spbrtoc.xml) and zero or more backup set folders (as spbrxxxx subfolders). SPBackupCatalog objects provide information about the backup catalog specified and can also be used as input for other operations that modify the backup catalog.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para>Copyright (C) 2011 Sean P. McDonough. Use of these cmdlets is at your own risk. Sean P. McDonough assumes no liability. For more information on the SharePoint 2010 Backup Augmentation Cmdlets, see http://sharepointbac.codeplex.com. </maml:para>
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>SPBackupCatalog</command:noun>
+      <dev:version>1.0.0.0</dev:version>
+    </command:details>
+    <maml:description>
+      <maml:para>This cmdlet is used to retrieve a backup catalog object (SPBackupCatalog) that represents a SharePoint farm backup location. A backup catalog is defined as the top-level folder that contains a table of contents file (spbrtoc.xml) and zero or more backup set folders (as spbrxxxx subfolders). SPBackupCatalog objects provide information about the backup catalog specified and can also be used as input for other operations that modify the backup catalog.</maml:para>
+      <maml:para />
+      <maml:para>Copyright (C) 2011 Sean P. McDonough. Use of these cmdlets is at your own risk. Sean P. McDonough assumes no liability. For more information on the SharePoint 2010 Backup Augmentation Cmdlets, see http://sharepointbac.codeplex.com. </maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-SPBackupCatalog</maml:name>
+        <command:parameter required="false" position="1">
+          <maml:name>CatalogPath</maml:name>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>AssignmentCollection</maml:name>
+          <command:parameterValue required="true">SPAssignmentCollection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="1" variableLength="false">
+        <maml:name>CatalogPath</maml:name>
+        <maml:description>
+          <maml:para>The file path containing the spbrtoc.xml file for the desired backup catalog. This parameter should normally be specified as a UNC path. In limited circumstances, such as with an all-in-one SharePoint server, a local path (beginning with a drive letter) may be acceptable.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" globbing="false" pipelineInput="true (ByValue)" position="named" variableLength="false">
+        <maml:name>AssignmentCollection</maml:name>
+        <maml:description>
+          <maml:para>Manages objects for the purpose of proper disposal. Use of objects, such as SPWeb or SPSite, can use large amounts of memory and use of these objects in Windows PowerShell scripts requires proper memory management. Using the SPAssignment object, you can assign objects to a variable and dispose of the objects after they are needed to free up memory. When SPWeb, SPSite, or SPSiteAdministration objects are used, the objects are automatically disposed of if an assignment collection or the Global parameter is not used.</maml:para>
+          <maml:para />
+          <maml:para>When the Global parameter is used, all objects are contained in the global store. If objects are not immediately used, or disposed of by using the Stop-SPAssignment command, an out-of-memory scenario can occur.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SPAssignmentCollection</command:parameterValue>
+        <dev:type>
+          <maml:name>SPAssignmentCollection</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name />
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name />
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <maml:alertSet>
+      <maml:title />
+      <maml:alert>
+        <maml:para>For more information, type "Get-Help Get-SPBackupCatalog -detailed". For technical information, type "Get-Help Get-SPBackupCatalog -full".</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1-----------------------</maml:title>
+        <dev:code>Get-SPBackupCatalog -CatalogPath "\\SPFarmShare\Backups"</dev:code>
+        <dev:remarks>
+          <maml:para>In this example, the -CatalogPath parameter is specified to retrieves an SPBackupCatalog for the backup catalog present at \\ProdFarm\Backups UNC path.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 2-----------------------</maml:title>
+        <dev:code>Get-SPBackupCatalog</dev:code>
+        <dev:remarks>
+          <maml:para>Retrieves a backup catalog for the SharePoint farm's default backup location. The default location is typically specified through the 'Configure Backup Settings' page within the Central Administration site.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Export-SPBackupCatalog</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Remove-SPBackupCatalog</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Send-SPBackupStatus</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/1" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+    <command:details>
+      <command:name>Send-SPBackupStatus</command:name>
+      <maml:description>
+        <maml:para>This cmdlet is used to send an e-mail to one or more recipients to communicate the backup status of a specific backup catalog. This is commonly done following a backup to let administrators know that a backup has taken place, if the backup contains errors, where the backup set was created, and more. E-mail messages are sent using the farm's configured outbound e-mail settings.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para>Copyright (C) 2011 Sean P. McDonough. Use of these cmdlets is at your own risk. Sean P. McDonough assumes no liability. For more information on the SharePoint 2010 Backup Augmentation Cmdlets, see http://sharepointbac.codeplex.com. </maml:para>
+      </maml:copyright>
+      <command:verb>Send</command:verb>
+      <command:noun>SPBackupStatus</command:noun>
+      <dev:version>1.0.0.0</dev:version>
+    </command:details>
+    <maml:description>
+      <maml:para>This cmdlet is used to send an e-mail to one or more recipients to communicate the backup status of a specific backup catalog. This is commonly done following a backup to let administrators know that a backup has taken place, if the backup contains errors, where the backup set was created, and more. E-mail messages are sent using the farm's configured outbound e-mail settings.</maml:para>
+      <maml:para />
+      <maml:para>Copyright (C) 2011 Sean P. McDonough. Use of these cmdlets is at your own risk. Sean P. McDonough assumes no liability. For more information on the SharePoint 2010 Backup Augmentation Cmdlets, see http://sharepointbac.codeplex.com. </maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Send-SPBackupStatus</maml:name>
+        <command:parameter required="true" position="1">
+          <maml:name>Identity</maml:name>
+          <command:parameterValue required="true">SPBackupCatalogPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>OnErrorOnly</maml:name>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" position="2">
+          <maml:name>Recipients</maml:name>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="3">
+          <maml:name>Subject</maml:name>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>AssignmentCollection</maml:name>
+          <command:parameterValue required="true">SPAssignmentCollection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" globbing="false" pipelineInput="true (ByValue)" position="1" variableLength="false">
+        <maml:name>Identity</maml:name>
+        <maml:description>
+          <maml:para>The backup catalog which will serve as the target for operations. This can be specified as an existing SPBackupCatalog object or as a path to the target backup catalog root (i.e., where the spbrtoc.xml resides).</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">SPBackupCatalogPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>SPBackupCatalogPipeBind</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named" variableLength="false">
+        <maml:name>OnErrorOnly</maml:name>
+        <maml:description>
+          <maml:para>When this switch is specified, a backup status e-mail message is only sent in the event that one or more errors are encountered in the most recent backup performed. Without this switch, a backup status e-mail is always sent.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="2" variableLength="false">
+        <maml:name>Recipients</maml:name>
+        <maml:description>
+          <maml:para>The e-mail addresses of the recipients to whom the backup status e-mail will be sent. If multiple e-mail addresses are specified, they must be separated by commas.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="3" variableLength="false">
+        <maml:name>Subject</maml:name>
+        <maml:description>
+          <maml:para>The subject line that will be used for the e-mail status message that is sent. If no subject line is specified, a generic subject line will be used.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" globbing="false" pipelineInput="true (ByValue)" position="named" variableLength="false">
+        <maml:name>AssignmentCollection</maml:name>
+        <maml:description>
+          <maml:para>Manages objects for the purpose of proper disposal. Use of objects, such as SPWeb or SPSite, can use large amounts of memory and use of these objects in Windows PowerShell scripts requires proper memory management. Using the SPAssignment object, you can assign objects to a variable and dispose of the objects after they are needed to free up memory. When SPWeb, SPSite, or SPSiteAdministration objects are used, the objects are automatically disposed of if an assignment collection or the Global parameter is not used.</maml:para>
+          <maml:para />
+          <maml:para>When the Global parameter is used, all objects are contained in the global store. If objects are not immediately used, or disposed of by using the Stop-SPAssignment command, an out-of-memory scenario can occur.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SPAssignmentCollection</command:parameterValue>
+        <dev:type>
+          <maml:name>SPAssignmentCollection</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name />
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name />
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <maml:alertSet>
+      <maml:title />
+      <maml:alert>
+        <maml:para>For more information, type "Get-Help Send-SPBackupStatus -detailed". For technical information, type "Get-Help Send-SPBackupStatus -full".</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1-----------------------</maml:title>
+        <dev:code>Get-SPBackupCatalog \\SPFarmShare\Backups | Send-SPBackupStatus -Recipients "admin@nosite.com" -OnErrorOnly</dev:code>
+        <dev:remarks>
+          <maml:para>This example illustrates piping an SPBackupCatalog object to the Send-SPBackupStatus cmdlet to send an e-mail status to admin@nosite.com. Since the -OnErrorOnly switch is employed, and e-mail only gets sent if the last backup set actually had an error count greater than zero.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 2-----------------------</maml:title>
+        <dev:code>Send-SPBackupStatus \\SPFarmShare\Backups -Recipients admin@nosite.com</dev:code>
+        <dev:remarks>
+          <maml:para>This example represents the simplest usage scenario. A backup status e-mail for the backup catalog located at \\SPFarmShare\Backups will be sent to admin@nosite.com. The message will contain information about the the most recent backup performed. Details such as the number of errors encountered, the location of the backup set, when the backup started, and more are included.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 3-----------------------</maml:title>
+        <dev:code>Send-SPBackupStatus E:\Backups -Recipients "admin@nosite.com, BackupGroup@nosite.com, FarmAdmin@nosite.com" -Subject "Last Backup Status for Production Farm"</dev:code>
+        <dev:remarks>
+          <maml:para>This example demonstrates how an e-mail can be sent with an alternate subject line. It also illustrates how to send the status message to multiple recipients by separating e-mail addresses using commas.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-SPBackupCatalog</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/1" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10">
+    <command:details>
+      <command:name>Export-SPBackupCatalog</command:name>
+      <maml:description>
+        <maml:para>The Export-SPBackupCatalog cmdlet is commonly used to create an external archive of older backup sets within a backup catalog. Backup sets are included either explicitly through a count or by specifying the number of newer backup sets that should be excluded. Exports that are created contain both the backup sets selected and a table of contents file that is recognized by SharePoint (for later restore operations). Exports are typically created as a single compressed (zip) file, but "loose exports" (i.e., without compression) can also be created.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para>Copyright (C) 2011 Sean P. McDonough. Use of these cmdlets is at your own risk. Sean P. McDonough assumes no liability. For more information on the SharePoint 2010 Backup Augmentation Cmdlets, see http://sharepointbac.codeplex.com. </maml:para>
+      </maml:copyright>
+      <command:verb>Export</command:verb>
+      <command:noun>SPBackupCatalog</command:noun>
+      <dev:version>1.0.0.0</dev:version>
+    </command:details>
+    <maml:description>
+      <maml:para>The Export-SPBackupCatalog cmdlet is commonly used to create an external archive of older backup sets within a backup catalog. Backup sets are included either explicitly through a count or by specifying the number of newer backup sets that should be excluded. Exports that are created contain both the backup sets selected and a table of contents file that is recognized by SharePoint (for later restore operations). Exports are typically created as a single compressed (zip) file, but "loose exports" (i.e., without compression) can also be created.</maml:para>
+      <maml:para />
+      <maml:para>Copyright (C) 2011 Sean P. McDonough. Use of these cmdlets is at your own risk. Sean P. McDonough assumes no liability. For more information on the SharePoint 2010 Backup Augmentation Cmdlets, see http://sharepointbac.codeplex.com. </maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Export-SPBackupCatalog</maml:name>
+        <command:parameter required="false" position="4">
+          <maml:name>ExcludeCount</maml:name>
+          <command:parameterValue required="true">Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="3">
+          <maml:name>ExportName</maml:name>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" position="2">
+          <maml:name>ExportPath</maml:name>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" position="1">
+          <maml:name>Identity</maml:name>
+          <command:parameterValue required="true">SPBackupCatalogPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>IgnoreBackupSetErrors</maml:name>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="5">
+          <maml:name>IncludeCount</maml:name>
+          <command:parameterValue required="true">Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>NoCompression</maml:name>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>UpdateCatalogPath</maml:name>
+          <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>AssignmentCollection</maml:name>
+          <command:parameterValue required="true">SPAssignmentCollection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="4" variableLength="false">
+        <maml:name>ExcludeCount</maml:name>
+        <maml:description>
+          <maml:para>The total number of non error-containing backup sets (starting at the most recent backup set) that should be excluded from the export operation. All other backup sets are exported. For example, specifying an -ExcludeCount value of 3 will result in the export of all backup sets except for the three most recent non error-containing backup sets. If the -ExcludeCount parameter is specified, the -IncludeCount parameter cannot be specified; specifying both parameters will yield an error. Excluding both -ExcludeCount and -IncludeCount parameters will result in the export of the entire backup catalog. Note that the -ExcludeCount parameter is analogous to the -RetainCount parameter that is used with the Remove-SPBackupCatalog cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="3" variableLength="false">
+        <maml:name>ExportName</maml:name>
+        <maml:description>
+          <maml:para>This parameter is used to specify the base name of the export file (without extension) that is created in the location specified by the -ExportPath. If the -NoCompression switch is used, then this parameter specifies the name of the subdirectory that will house the exported backup sets in the location specified by the -ExportPath parameter. If the -ExportName parameter is not specified, a DateTime serial value is generated and used as either the archive file base name or subdirectory name as needed.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" globbing="false" pipelineInput="false" position="2" variableLength="false">
+        <maml:name>ExportPath</maml:name>
+        <maml:description>
+          <maml:para>This path identifies the root file location where the export file(s) should be created. This parameter should normally be specified as a UNC path. In limited circumstances, such as with an all-in-one SharePoint server, a local path (beginning with a drive letter) may be acceptable.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" globbing="false" pipelineInput="true (ByValue)" position="1" variableLength="false">
+        <maml:name>Identity</maml:name>
+        <maml:description>
+          <maml:para>The backup catalog which will serve as the target for export selection. The backup catalog can be specified as an existing SPBackupCatalog object or as a path to the target backup catalog root (i.e., where the spbrtoc.xml resides).</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">SPBackupCatalogPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>SPBackupCatalogPipeBind</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named" variableLength="false">
+        <maml:name>IgnoreBackupSetErrors</maml:name>
+        <maml:description>
+          <maml:para>When -ExcludeCount and -IncludeCount selections are performed, they omit backup sets that have errors. This also means that if a full backup set contains errors and is omitted from export, then any differential backups that depend on the full backup set are also omitted. This is done to make operations equivalent to those of the Remove-SPBackupCatalog cmdlet. If the -IgnoreBackupSetErrors switch is specified, then -ExcludeCount and -IncludeCount selections are made without regard to whether or not backup sets contain errors.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="5" variableLength="false">
+        <maml:name>IncludeCount</maml:name>
+        <maml:description>
+          <maml:para>The total number of non error-containing backup sets (starting at the oldest backup set) that should be included in the export operation. All newer backup sets are excluded from the export. For example, specifying an -IncludeCount value of 2 will result in the export of the two oldest non error-containing backup sets. If the -IncludeCount parameter is specified, the -ExcludeCount parameter cannot be specified; specifying both parameters will yield an error. Excluding both -IncludeCount and -ExcludeCount parameters will result in the export of the entire backup catalog.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named" variableLength="false">
+        <maml:name>NoCompression</maml:name>
+        <maml:description>
+          <maml:para>When a backup export is created, one or more backup sets are normally compressed into a single zip archive. If this switch is used, then backup sets are "loosely" copied in uncompressed format to the destination folder specified by a combination of the -ExportPath parameter and the -ExportName parameter.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" globbing="false" pipelineInput="false" position="named" variableLength="false">
+        <maml:name>UpdateCatalogPath</maml:name>
+        <maml:description>
+          <maml:para>When this switch is set, the backup set pointers contained within the catalog will be updated to make them consistent with the -ExportPath (and the -ExportName when it is part of the destination path structure). This switch is commonly used in combination with the -NoCompression switch to make the exported backup sets usable in their destination location.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" globbing="false" pipelineInput="true (ByValue)" position="named" variableLength="false">
+        <maml:name>AssignmentCollection</maml:name>
+        <maml:description>
+          <maml:para>Manages objects for the purpose of proper disposal. Use of objects, such as SPWeb or SPSite, can use large amounts of memory and use of these objects in Windows PowerShell scripts requires proper memory management. Using the SPAssignment object, you can assign objects to a variable and dispose of the objects after they are needed to free up memory. When SPWeb, SPSite, or SPSiteAdministration objects are used, the objects are automatically disposed of if an assignment collection or the Global parameter is not used.</maml:para>
+          <maml:para />
+          <maml:para>When the Global parameter is used, all objects are contained in the global store. If objects are not immediately used, or disposed of by using the Stop-SPAssignment command, an out-of-memory scenario can occur.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SPAssignmentCollection</command:parameterValue>
+        <dev:type>
+          <maml:name>SPAssignmentCollection</maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name />
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name />
+          <maml:uri />
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <maml:alertSet>
+      <maml:title />
+      <maml:alert>
+        <maml:para>For more information, type "Get-Help Export-SPBackupCatalog -detailed". For technical information, type "Get-Help Export-SPBackupCatalog -full".</maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1-----------------------</maml:title>
+        <dev:code>Export-SPBackupCatalog \\SPFarmShare\Backups -ExportPath \\ArchiveShare\SharePoint -IncludeCount 2 -IgnoreBackupSetErrors</dev:code>
+        <dev:remarks>
+          <maml:para>This example demonstrates how to export the two oldest full backup sets and any differential backup sets that depend on them. Since no -ExportName is specified, a zip archive filename will automatically be created by the system using date/time information. The -IgnoreBackupSetErrors switch is applied, so backup sets containing errors will not be excluded from the export selection process.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 2-----------------------</maml:title>
+        <dev:code>Export-SPBackupCatalog \\SPFarmShare\Backups -ExportPath \\ArchiveShare\SharePoint -ExportName NewSPExports -ExcludeCount 2 -NoCompression -UpdateCatalogPath</dev:code>
+        <dev:remarks>
+          <maml:para>This command line results in the export of all backup sets in the catalog save for the most recent two (full) sets and any differential backups that depend on them. The -NoCompression switch is applied, so backup sets will not be compressed into a zip archive. Since the -NoCompression switch is used, the -ExportName parameter will be used to create a subdirectory in the -ExportPath share, and exported backup sets will be copied to this location (i.e., \\ArchiveShare\SharePoint\SPExports). Using the -UpdateCatalogPath switch will adjust all backup set path pointers within the backup catalog to point to the full destination path of the export; i.e., \\ArchiveShare\SharePoint\SPExports.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 3-----------------------</maml:title>
+        <dev:code>Export-SPBackupCatalog \\SPFarmShare\Backups -ExportPath \\ArchiveShare\SharePoint</dev:code>
+        <dev:remarks>
+          <maml:para>This example demonstrates how all backup sets in the backup catalog located at the \\SPFarmShare\Backups location can be exported to another share (\\ArchiveShare\SharePoint). The backup sets are compressed into a single zip file which is auto-named (since no -ExportName is specified) using a date/time serial value. Only backup sets that are error-free are exported; if a full backup sets contains errors, any differential backup sets that depends on the full backup set are also omitted.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 4-----------------------</maml:title>
+        <dev:code>Get-SPBackupCatalog \\SPFarmShare\Backups | Export-SPBackupCatalog -ExportPath \\ArchiveShare\SharePoint -ExportName MyBackupArchive -IncludeCount 1</dev:code>
+        <dev:remarks>
+          <maml:para>In this example, an SPBackupCatalog object is created and piped to the Export-SPBackupCatalog cmdlet. The cmdlet then creates an export of the last full backup set (and any differential backup sets tied to it) in the catalog at the specified share: \\ArchiveShare\SharePoint. The export will be found in the share as a single compressed archive file named MyBackupArchive.zip</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 5-----------------------</maml:title>
+        <dev:code>Export-SPBackupCatalog \\SPFarmShare\Backups -ExportPath \\ArchiveShare\SharePoint -ExportName SPExports -ExcludeCount 3 -NoCompression</dev:code>
+        <dev:remarks>
+          <maml:para>This command line results in the export of all backup sets in the catalog save for the most recent three (full) sets and any differential backups that depend on them. The -NoCompression switch is applied, so backup sets will not be compressed into a zip archive. Since the -NoCompression switch is used, the -ExportName parameter will be used to create a subdirectory in the -ExportPath share, and exported backup sets will be copied to this location (i.e., \\ArchiveShare\SharePoint\SPExports).</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-SPBackupCatalog</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+</helpItems>

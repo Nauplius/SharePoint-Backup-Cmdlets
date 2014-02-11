@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{28BE235D-0DE6-4D15-89CD-3F497B80240A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SPMcDonough.BAC</RootNamespace>
+    <AssemblyName>SPMcDonough.BAC</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{BB1F664B-9266-4fd6-B973-E1E44974B511};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SandboxedSolution>False</SandboxedSolution>
+    <ActiveDeploymentConfiguration>PowerShell Cmdlets</ActiveDeploymentConfiguration>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <UpgradeBackupLocation>C:\Users\trevor\Source\Workspaces\sharepointbac\Backup\SPMcDonough.BAC\</UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <SkipPostSharp>True</SkipPostSharp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>SPMcDonough.BAC.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ionic.Zip.Reduced, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL" />
+    <Reference Include="Lapointe.PowerShell.MamlGenerator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=313d176eae804710, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.SharePoint" />
+    <Reference Include="Microsoft.SharePoint.Security" />
+    <Reference Include="System.Management.Automation" />
+    <Reference Include="Microsoft.SharePoint.PowerShell" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BackupCatalogUtilities.cs" />
+    <Compile Include="CommunicationUtilities.cs" />
+    <Compile Include="Globals.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SPBackupCatalogPipeBind.cs" />
+    <Compile Include="SPCmdletExportSPBackupCatalog.cs" />
+    <Compile Include="SPCmdletGetSPBackupCatalog.cs" />
+    <Compile Include="SPBackupCatalog.cs" />
+    <Compile Include="SPCmdletRemoveSPBackupCatalog.cs" />
+    <Compile Include="SPCmdletSendSPBackupStatus.cs" />
+    <Compile Include="SPCmdletSetSPBackupCatalog.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BuildSupport\MamlDocBuild.ps1" />
+    <None Include="POWERSHELL\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{ad195e85-26f9-4342-90bd-6bfe4c3ac148}</SharePointProjectItemId>
+    </None>
+    <None Include="SPMcDonough.BAC.snk" />
+    <None Include="Package\Package.package">
+      <PackageId>{075a266b-9984-4aeb-b24e-803843530c7f}</PackageId>
+    </None>
+    <None Include="Package\Package.Template.xml">
+      <DependentUpon>Package.package</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\" />
+    <Folder Include="POWERSHELL\Format\" />
+    <Folder Include="POWERSHELL\Types\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Send-SPBackupStatus_Status_Template.html" />
+    <None Include="BuildSupport\Lapointe.PowerShell.MamlGenerator.dll" />
+    <Content Include="BuildSupport\Ionic.Zip.Reduced.dll" />
+    <Content Include="POWERSHELL\Help\SPMcDonough.BAC.Cmdlets.dll-help.xml" />
+    <Content Include="POWERSHELL\Registration\SPMcDonough.BAC.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{BB1F664B-9266-4fd6-B973-E1E44974B511}">
+        <DeploymentConfigurations>
+          <DeploymentConfiguration Name="PowerShell Cmdlets" Description="Used when developing PowerShell cmdlets that have a small farm footprint and no IIS reset impact.">
+            <DeploymentSteps>Microsoft.VisualStudio.SharePoint.PreDeploymentCommand;Microsoft.VisualStudio.SharePoint.RetractSolution;Microsoft.VisualStudio.SharePoint.AddSolution;Microsoft.VisualStudio.SharePoint.PostDeploymentCommand</DeploymentSteps>
+            <RetractionSteps>Microsoft.VisualStudio.SharePoint.RetractSolution</RetractionSteps>
+          </DeploymentConfiguration>
+        </DeploymentConfigurations>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>cd $(ProjectDir)BuildSupport
+"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -File MamlDocBuild.ps1 -assemblyPath $(TargetDir)$(TargetFileName) -outputPath $(ProjectDir)POWERSHELL\Help\</PostBuildEvent>
+  </PropertyGroup>
+</Project>
