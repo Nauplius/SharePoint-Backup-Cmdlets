@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="075a266b-9984-4aeb-b24e-803843530c7f" solutionId="075a266b-9984-4aeb-b24e-803843530c7f" resetWebServer="false" title="SharePoint Backup Augmentation Cmdlets" description="PowerShell cmdlets to supplement native backup/restore functionality." name="SharePointBAC" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <assemblies>
+    <customAssembly location="Lapointe.PowerShell.MamlGenerator.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="BuildSupport\Lapointe.PowerShell.MamlGenerator.dll" />
+    <customAssembly location="Ionic.Zip.Reduced.dll" deploymentTarget="GlobalAssemblyCache" sourcePath="BuildSupport\Ionic.Zip.Reduced.dll" />
+  </assemblies>
+  <projectItems>
+    <projectItemReference itemId="ad195e85-26f9-4342-90bd-6bfe4c3ac148" />
+  </projectItems>
+</package>
