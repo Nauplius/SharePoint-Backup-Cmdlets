@@ -1,46 +1,29 @@
 ﻿#region Namespace Imports
 
-
 // Standard class imports
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 // Imports that are needed for SharePoint and PowerShell
-using Microsoft.SharePoint;
 using Microsoft.SharePoint.Administration;
-using Microsoft.SharePoint.PowerShell;
-using System.Management.Automation;
 
 // Used for sending e-mail messages
 using System.Net.Mail;
 
-// For XML and LINQ processing
-using System.Xml;
-using System.Xml.Linq;
-
 // Set resources alias
 using res = SPMcDonough.BAC.Properties.Resources;
 
-
 #endregion Namespace Imports
-
 
 namespace SPMcDonough.BAC
 {
-
-
     /// <summary>
     /// This utility class contains the methods that are used for communication purposes such as
     /// e-mail.
     /// </summary>
     internal static class CommunicationUtilities
     {
-
-
         #region Methods (Public, Static)
-
 
         /// <summary>
         /// This method is used to send an e-mail message "from the farm;" i.e., using the configured
@@ -62,10 +45,10 @@ namespace SPMcDonough.BAC
         {
             // We need to get each of the unspecified parameters that will be needed for sending e-mail. This
             // means drilling into the farm to get at the Central Admin web app and OutboundMailServiceInstance.
-            SPWebApplication caWebApp = SPWebService.AdministrationService.WebApplications.First();
+            var caWebApp = SPWebService.AdministrationService.WebApplications.First();
 
             // Setup the mail message we'll actually need
-            using (MailMessage mailToSend = new MailMessage())
+            using (var mailToSend = new MailMessage())
             {
                 // Assign the sender info from the SharePoint outbound mail settings
                 mailToSend.From = new MailAddress(caWebApp.OutboundMailSenderAddress);
@@ -84,14 +67,10 @@ namespace SPMcDonough.BAC
                 }
 
                 // Prep the SMTP client and send.
-                SmtpClient gateway = new SmtpClient(caWebApp.OutboundMailServiceInstance.Server.Address);
+                var gateway = new SmtpClient(caWebApp.OutboundMailServiceInstance.Server.Address);
                 gateway.Send(mailToSend);
             }
         }
-
-
         #endregion Methods (Public, Static)
-
-
     }
 }

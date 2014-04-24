@@ -5,18 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-// Imports that are needed for SharePoint and PowerShell
-using Microsoft.SharePoint;
-using Microsoft.SharePoint.PowerShell;
-using System.Management.Automation;
 
 // Needed for some folder and I/O related operations
 using System.IO;
 
 // For XML and LINQ processing
-using System.Xml;
 using System.Xml.Linq;
 
 // For working with Zip files using the DotNetZip Library (which is available
@@ -33,7 +26,6 @@ using res = SPMcDonough.BAC.Properties.Resources;
 namespace SPMcDonough.BAC
 {
 
-
     /// <summary>
     /// This class contains the methods that are actually used to interact with the backup
     /// catalogs (as <see cref="SPBackupCatalog"/> objects) and files that they contain.
@@ -42,9 +34,7 @@ namespace SPMcDonough.BAC
     internal static class BackupCatalogUtilities
     {
 
-
         #region Methods (Public, Static)
-
 
         /// <summary>
         /// This method is used to examine an <see cref="SPBackupCatalog"/> and build a String that can
@@ -57,33 +47,52 @@ namespace SPMcDonough.BAC
         {
             // Build a list for argument insertion into the template we'll eventually pull from the
             // resources area.
-            List<Object> mailArgs = new List<Object>();
+            var mailArgs = new List<Object>
+            {
+                DateTime.Now.ToShortTimeString(),
+                DateTime.Now.ToLongDateString(),
+                workingCatalog.LastBackupPath,
+                workingCatalog.LastBackupTopComponent,
+                workingCatalog.LastBackupMethod,
+                workingCatalog.LastBackupRequestor,
+                Globals.IntelligentDateTimeFormat(workingCatalog.LastBackupStart)
+            };
 
             // The first two arguments are the time {0} and date {1}
-            mailArgs.Add(DateTime.Now.ToShortTimeString());
-            mailArgs.Add(DateTime.Now.ToLongDateString());
 
             // The next block is for general backup information: location {2}, top component {3},
             // backup method {4}, and requestor {5}
-            mailArgs.Add(workingCatalog.LastBackupPath);
-            mailArgs.Add(workingCatalog.LastBackupTopComponent);
-            mailArgs.Add(workingCatalog.LastBackupMethod);
-            mailArgs.Add(workingCatalog.LastBackupRequestor);
 
             // The final block is for start date/time {6}, finish date/time {7}, duration {8},
             // backup set size {9}, error count {10}, and warning count {11}
-            mailArgs.Add(Globals.IntelligentDateTimeFormat(workingCatalog.LastBackupStart));
-            mailArgs.Add(Globals.IntelligentDateTimeFormat(workingCatalog.LastBackupFinish));
-            mailArgs.Add(Globals.IntelligentTimeFormat(workingCatalog.LastBackupDuration));
+
+            try
+            {
+                mailArgs.Add(Globals.IntelligentDateTimeFormat(workingCatalog.LastBackupFinish));
+            }
+            catch (FormatException)
+            {
+                mailArgs.Add(null);
+            }
+
+            try
+            {
+                mailArgs.Add(Globals.IntelligentTimeFormat(workingCatalog.LastBackupDuration));
+            }
+            catch (FormatException)
+            {
+                mailArgs.Add(null);
+            }
+
             mailArgs.Add(Globals.IntelligentBytesFormat(workingCatalog.LastBackupSize));
             mailArgs.Add(Globals.IntelligentIntegerFormat(workingCatalog.LastBackupErrorCount));
             mailArgs.Add(Globals.IntelligentIntegerFormat(workingCatalog.LastBackupWarningCount));
 
             // Execute a replacement against the template using the argument list we built up and return
             // it for e-mail purposes.
-            String bodyTemplate = res.Send_SPBackupStatus_Status_Template;
-            Object[] paramVals = mailArgs.ToArray();
-            String mailBody = String.Format(bodyTemplate, paramVals);
+            var bodyTemplate = res.Send_SPBackupStatus_Status_Template;
+            var paramVals = mailArgs.ToArray();
+            var mailBody = String.Format(bodyTemplate, paramVals);
             return mailBody;
         }
 
@@ -144,7 +153,7 @@ namespace SPMcDonough.BAC
         /// method map in some way to acceptable parameters for the cmdlet.
         /// </summary>
         /// <seealso cref="SPCmdletExportSPBackupCatalog"/>
-        public static void ExportBackupCatalog(SPBackupCatalog workingCatalog, String exportPath, String exportName, 
+        public static void ExportBackupCatalog(SPBackupCatalog workingCatalog, String exportPath, String exportName,
             BackupSetExportMode exportMode, Int32 exportCount, Boolean ignoreErrors, Boolean useNoCompression,
             Boolean updateCatalogPath)
         {
@@ -177,8 +186,9 @@ namespace SPMcDonough.BAC
 
             // We've got the appropriate backup sets selected; now we may need to narrow them down based
             // on the type export action/mode specified.
-            Int32 lastKeepIndex = 0;
-            Int32 lastDirNumber = -1;
+            var lastKeepIndex = 0;
+            var lastDirNumber = -1;
+
             switch (exportMode)
             {
                 case BackupSetExportMode.ExportAll:
@@ -225,16 +235,15 @@ namespace SPMcDonough.BAC
             // NOTE: Only full and differential content backups are included for export. Config-only backups
             // are excluded. The ignoreErrors switch is also obeyed to determine if backups with errors are
             // included in the export.
-            IEnumerable<XElement> exportSelections;
-            exportSelections = tocFile.Elements().Where(ho =>
+            IEnumerable<XElement> exportSelections = tocFile.Elements().Where(ho =>
                 (ho.Element("SPIsBackup").Value.Trim().ToUpper() == "TRUE" &&
-                ho.Element("SPConfigurationOnly").Value.Trim().ToUpper() == "FALSE" &&
-                Convert.ToInt32(ho.Element("SPDirectoryNumber").Value) < lastDirNumber));
+                 ho.Element("SPConfigurationOnly").Value.Trim().ToUpper() == "FALSE" &&
+                 Convert.ToInt32(ho.Element("SPDirectoryNumber").Value) < lastDirNumber));
 
             // If we aren't ignoring errors, then we have some clean-up to do. Differential backups themselves 
             // are easy to drop (no dependencies), but we'll need some special logic to clean up full backups
             // because of the fact that differentials may be tied to them.
-            List<Int32> additionalDirectoryExclusions = new List<Int32>();
+            var additionalDirectoryExclusions = new List<Int32>();
             if (!ignoreErrors)
             {
                 // Work our way "backward" through the collection. Oldest sets are at the end of the collection,
@@ -286,7 +295,7 @@ namespace SPMcDonough.BAC
                 // We'll be cross-checking to make sure that the directory number of each backup isn't present in
                 // the exclude list before selecting it for backup.
                 String backupRoot = workingCatalog.CatalogPath;
-                var backupSetsToExport = exportSelections.Where(bse => 
+                var backupSetsToExport = exportSelections.Where(bse =>
                     additionalDirectoryExclusions.IndexOf(Convert.ToInt32(bse.Element("SPDirectoryNumber").Value)) == -1).Select(se =>
                     new { RelativeFolder = se.Element("SPDirectoryName").Value, SourceFolder = Path.Combine(backupRoot, se.Element("SPDirectoryName").Value) }).ToList();
 
@@ -323,18 +332,18 @@ namespace SPMcDonough.BAC
                 {
                     // We're not using compression, so we need to create a folder structure at the export path.
                     // Build the full path and use it for the creation.
-                    String exportFullPath = Path.Combine(exportPath, exportName);
+                    var exportFullPath = Path.Combine(exportPath, exportName);
                     Directory.CreateDirectory(exportFullPath);
 
                     // Write out the table of contents to export area.
-                    String tocFilePath = Path.Combine(exportFullPath, Globals.TOC_FILENAME);
+                    var tocFilePath = Path.Combine(exportFullPath, Globals.TOC_FILENAME);
                     newTocFile.Save(tocFilePath);
 
                     // Iterate through each of the backup sets to export and copy them to the export area.
                     foreach (var exportBackupSet in backupSetsToExport)
                     {
                         // Create the destination folder.
-                        String destinationFolder = Path.Combine(exportFullPath, exportBackupSet.RelativeFolder);
+                        var destinationFolder = Path.Combine(exportFullPath, exportBackupSet.RelativeFolder);
                         Directory.CreateDirectory(destinationFolder);
 
                         // We now need to recursively copy the contents of the source folder (and its subdirectories
@@ -348,15 +357,15 @@ namespace SPMcDonough.BAC
                     // zip file we create. Make sure the export name actually ends in .zip
                     if (!exportName.EndsWith(Globals.EXPORT_ARCHIVE_EXTENSION, StringComparison.InvariantCultureIgnoreCase))
                     { exportName += Globals.EXPORT_ARCHIVE_EXTENSION; }
-                    
+
                     // Build the full path to the zip file we want to create; if it already exists, delete it so
                     // we can write out the new one.
-                    String archiveFullPath = Path.Combine(exportPath, exportName);
+                    var archiveFullPath = Path.Combine(exportPath, exportName);
                     if (File.Exists(archiveFullPath))
                     { File.Delete(archiveFullPath); }
 
                     // Prep the zip archive that we'll be writing to
-                    using (ZipFile catalogArchive = new ZipFile(archiveFullPath))
+                    using (var catalogArchive = new ZipFile(archiveFullPath))
                     {
                         // Begin by writing out the table of contents to the root of the archive.
                         catalogArchive.AddEntry(Globals.TOC_FILENAME, newTocFile.ToString());
@@ -394,7 +403,7 @@ namespace SPMcDonough.BAC
             Int64? operationResult = 0;
             try
             {
-                String[] allFileNames = Directory.GetFiles(rootFolder, "*", SearchOption.AllDirectories);
+                var allFileNames = Directory.GetFiles(rootFolder, "*", SearchOption.AllDirectories);
                 var allFileInfos = allFileNames.Select(cf => new FileInfo(cf));
                 operationResult = (Int64?)allFileInfos.Sum(fi => fi.Length);
             }
@@ -404,8 +413,8 @@ namespace SPMcDonough.BAC
             }
             return operationResult;
         }
-        
-        
+
+
         /// <summary>
         /// This method is called to trim the contents of an <see cref="SPBackupCatalog"/> to retain
         /// only a certain number of full backups. The method is responsible for ensuring that only
@@ -431,7 +440,7 @@ namespace SPMcDonough.BAC
         {
             // Use the XML for the backup catalog's TOC to grab all of the full backup SPHistoryObject
             // nodes and reverse sort them by directory number.
-            XElement tocFile = workingCatalog.TableOfContents;
+            var tocFile = workingCatalog.TableOfContents;
             IOrderedEnumerable<XElement> fullHistoryObjects;
 
             // If we aren't ignoring errors, then we'll need to limit (potentially) the fullHistoryObjects
@@ -445,7 +454,7 @@ namespace SPMcDonough.BAC
                     ho.Element("SPIsBackup").Value.Trim().ToUpper() == "TRUE").OrderByDescending(fho =>
                     Convert.ToInt32(fho.Element("SPDirectoryNumber").Value));
             }
-            else 
+            else
             {
                 // Only SPHistoryObjects with a zero error count are valid
                 fullHistoryObjects = tocFile.Elements().Where(ho =>
@@ -520,8 +529,8 @@ namespace SPMcDonough.BAC
         {
             // Use the XML for the backup catalog's TOC to grab all of the full backup SPHistoryObject
             // nodes and reverse sort them by directory number.
-            String backupRoot = workingCatalog.CatalogPath;
-            XElement tocFile = workingCatalog.TableOfContents;
+            var backupRoot = workingCatalog.CatalogPath;
+            var tocFile = workingCatalog.TableOfContents;
             IOrderedEnumerable<XElement> fullHistoryObjects;
 
             // If we aren't ignoring errors, then we'll need to limit (potentially) the fullHistoryObjects
@@ -554,7 +563,7 @@ namespace SPMcDonough.BAC
                 // Get the ID of the next-to-the-last full backup set; i.e., the last full backup
                 // set that will remain in the catalog after the delete. Everything below it in the
                 // directory number sequence will be wiped.
-                Int32 lastDirNumber = Convert.ToInt32(fullHistoryObjects.ElementAt(fullHistoryObjects.Count() - 2).Element("SPDirectoryNumber").Value);
+                var lastDirNumber = Convert.ToInt32(fullHistoryObjects.ElementAt(fullHistoryObjects.Count() - 2).Element("SPDirectoryNumber").Value);
 
                 // We need each of the folders we'll be deleting as part of the operation. This has to be
                 // dumped to a list because subsequent deferred evaluation (when deleting folders) wouldn't
@@ -633,7 +642,7 @@ namespace SPMcDonough.BAC
 
             // Assign the updated TOC structure back to the catalog and save it off.
             workingCatalog.TableOfContents = workingToc;
-            workingCatalog.SaveTableOfContents();            
+            workingCatalog.SaveTableOfContents();
         }
 
 
