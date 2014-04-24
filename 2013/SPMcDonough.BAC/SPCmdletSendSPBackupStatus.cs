@@ -87,7 +87,7 @@ namespace SPMcDonough.BAC
                     CommunicationUtilities.SendFarmEmail(this.Recipients, String.Empty, mailSubject, mailBody, true);
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) //string not valid datetime
             {
                 // Something went wrong with the backup catalog, the e-mail process, or something in-between.
                 // Regardless, we need to terminate the pipeline -- nothing more can be done.
