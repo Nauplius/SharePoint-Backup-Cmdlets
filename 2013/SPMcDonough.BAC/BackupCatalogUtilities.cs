@@ -5,18 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
-// Imports that are needed for SharePoint and PowerShell
-using Microsoft.SharePoint;
-using Microsoft.SharePoint.PowerShell;
-using System.Management.Automation;
 
 // Needed for some folder and I/O related operations
 using System.IO;
 
 // For XML and LINQ processing
-using System.Xml;
 using System.Xml.Linq;
 
 // For working with Zip files using the DotNetZip Library (which is available
@@ -61,9 +54,17 @@ namespace SPMcDonough.BAC
                 workingCatalog.LastBackupPath,
                 workingCatalog.LastBackupTopComponent,
                 workingCatalog.LastBackupMethod,
-                workingCatalog.LastBackupRequestor,
-                Globals.IntelligentDateTimeFormat(workingCatalog.LastBackupStart)
+                workingCatalog.LastBackupRequestor
             };
+
+            try
+            {
+                mailArgs.Add(Globals.IntelligentDateTimeFormat(workingCatalog.LastBackupStart));
+            }
+            catch (FormatException)
+            {
+                mailArgs.Add(null);
+            }
 
             // The first two arguments are the time {0} and date {1}
 
