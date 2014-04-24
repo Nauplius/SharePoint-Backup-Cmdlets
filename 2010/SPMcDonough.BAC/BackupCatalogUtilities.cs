@@ -54,9 +54,18 @@ namespace SPMcDonough.BAC
                 workingCatalog.LastBackupPath,
                 workingCatalog.LastBackupTopComponent,
                 workingCatalog.LastBackupMethod,
-                workingCatalog.LastBackupRequestor,
-                Globals.IntelligentDateTimeFormat(workingCatalog.LastBackupStart)
+                workingCatalog.LastBackupRequestor
             };
+
+            try
+            {
+                mailArgs.Add(Globals.IntelligentDateTimeFormat(workingCatalog.LastBackupStart));
+            }
+            catch (FormatException)
+            {
+                mailArgs.Add(null);
+            }
+
 
             // The first two arguments are the time {0} and date {1}
 
