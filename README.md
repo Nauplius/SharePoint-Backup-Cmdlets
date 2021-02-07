@@ -1,3 +1,7 @@
+**Repository Moved**
+
+This repository has moved to [tseward/SharePoint-Backup-Cmdlets](https://github.com/tseward/SharePoint-Backup-Cmdlets). 
+ 
  Installation
 * Extract the zip file on the SharePoint server
 * From the SharePoint Management Shell, run SharePointBAC.ps1
